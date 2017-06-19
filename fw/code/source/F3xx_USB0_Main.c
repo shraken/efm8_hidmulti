@@ -60,9 +60,6 @@ void main(void)
 
    while (1)
    {
-			//delay_usec(10000);
-			//delay_msec(10);
-		 
 			if (!SendPacketBusy) {
 					SendPacket (IN_DATA);
 			}

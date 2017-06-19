@@ -393,12 +393,6 @@ void Get_Descriptor (void)             // This routine sets the data pointer
       break;
 
    case DSC_HID_REPORT:                // HID Specific (HID report descriptor)
-		  /*
-      DATAPTR = (unsigned char*)&HIDREPORTDESC;
-      DATASIZE = HID_REPORT_DESCRIPTOR_SIZE;
-      break;
-			*/
-	 
 			if (SETUP.wIndex.U8[LSB] == 0x00) {
 				DATAPTR = (unsigned char*)&HIDREPORTDESC;
 				DATASIZE = HID_REPORT_DESCRIPTOR_SIZE;
@@ -680,14 +674,6 @@ void Set_Idle (void)
 //-----------------------------------------------------------------------------
 void Get_Report (void)
 {
-	 /*
-   // call appropriate handler to prepare buffer
-   ReportHandler_IN_ISR(SETUP.wValue.U8[LSB]);
-   // set DATAPTR to buffer used inside Control Endpoint
-   DATAPTR = IN_BUFFER.Ptr;
-   DATASIZE = IN_BUFFER.Length;
-	 */
-	
 	 if (SETUP.wIndex.U8[LSB] == 0x00) {
 	    // call appropriate handler to prepare buffer
 			ReportHandler_IN_ISR(SETUP.wValue.U8[LSB]);

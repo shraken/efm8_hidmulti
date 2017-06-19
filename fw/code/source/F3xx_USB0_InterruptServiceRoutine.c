@@ -652,7 +652,6 @@ void SendPacket (unsigned char ReportID)
    unsigned char ControlReg;
 
 	 EAState = EA;
-   //EA = 0;
    SendPacketBusy = 1;
 
 	 POLL_WRITE_BYTE (INDEX, 1);         // Set index to endpoint 1 registers
@@ -681,29 +680,20 @@ void SendPacket (unsigned char ReportID)
       {
          POLL_WRITE_BYTE (EINCSR1, 0x00);
       }
-      //EA = 0;
-			// shraken: add this line above so the Timer0 millis/micros timer
-			// can be serviced.  Only disable USB interrupts in this critical
-			// section
+
 			EIE1 &= ~0x02;                   // Disable USB0 Interrupts
 			
       ReportHandler_IN_Foreground (ReportID);
 
       // Put new data on Fifo
-      // Disable USB interrupts
-      //EIE1 &= ~0x02;                   // Disable USB0 Interrupts
-
       Fifo_Write_Foreground (FIFO_EP1, IN_BUFFER.Length,
                     (unsigned char *)IN_BUFFER.Ptr);
       POLL_WRITE_BYTE (EINCSR1, rbInINPRDY);
                                        // Set In Packet ready bit,
                                        // indicating fresh data on FIFO 2
       
-			//EA = 1;
 			EIE1 |= 0x02;                    // Enable USB0 Interrupts
    }
-
-   //EA = EAState;
 }
 
 void SendPacket2(unsigned char ReportID)
@@ -712,7 +702,6 @@ void SendPacket2(unsigned char ReportID)
    unsigned char ControlReg;
 
 	 EAState = EA;
-   //EA = 0;
    SendPacketBusy2 = 1;
 
 	 POLL_WRITE_BYTE (INDEX, 2);         // Set index to endpoint 2 registers
@@ -741,17 +730,10 @@ void SendPacket2(unsigned char ReportID)
       {
          POLL_WRITE_BYTE (EINCSR1, 0x00);
       }
-      //EA = 0;
-			// shraken: add this line above so the Timer0 millis/micros timer
-			// can be serviced.  Only disable USB interrupts in this critical
-			// section
+
 			EIE1 &= ~0x02;                   // Disable USB0 Interrupts
 			
       ReportHandler_IN_Foreground2 (ReportID);
-
-      // Put new data on Fifo
-      // Disable USB interrupts
-      //EIE1 &= ~0x02;                   // Disable USB0 Interrupts
 
       Fifo_Write_Foreground (FIFO_EP2, IN_BUFFER2.Length,
                     (unsigned char *)IN_BUFFER2.Ptr);
@@ -759,11 +741,8 @@ void SendPacket2(unsigned char ReportID)
                                        // Set In Packet ready bit,
                                        // indicating fresh data on FIFO 2
       
-			//EA = 1;
 			EIE1 |= 0x02;                    // Enable USB0 Interrupts
    }
-
-   //EA = EAState;
 }
 
 //-----------------------------------------------------------------------------
