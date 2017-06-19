@@ -106,8 +106,6 @@ int main(int argc, char* argv[])
 	// Set the hid_read() function to be non-blocking.
 	hid_set_nonblocking(handle, 1);
 
-	//return 0;
-
 	// Read requested state. hid_read() has been set to be
 	// non-blocking by the call to hid_set_nonblocking() above.
 	// This loop demonstrates the non-blocking nature of hid_read().
@@ -115,10 +113,6 @@ int main(int argc, char* argv[])
 	count = 0;
 	while ((res == 0) || (count < 100000)) {
 		res = hid_read(handle, buf, sizeof(buf));
-		//if (res == 0)
-		//	printf("waiting...\n");
-		//if (res < 0)
-		//	printf("Unable to read()\n");
 		if (res > 0) {
 			printf("received new USB packet %d\n", count);
 			printf("Data read:\n   ");
