@@ -16,8 +16,8 @@ EFM8UB2 Universal Bee starter kit.
 
 ## Requirements
 
-Keil uVision v5.2x
-CMake 2.8+
+* Keil uVision v5.2x
+* CMake 2.8+
 
 ## Building and Flashing It
 
@@ -28,10 +28,13 @@ Studio GUI or JLinkExe.
 
 ### Software
 `mkdir build`
+
 `cd build`
+
 `cmake ..`
 
 On Unix-based systems:
+
 `make`
 
 On Windows-based systems:
