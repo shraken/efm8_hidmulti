@@ -14,6 +14,9 @@ receipt on the host.
 This project builds for a Silicon Labs EFM8UB2 device type and was tested on the
 EFM8UB2 Universal Bee starter kit.  
 
+The porting effort is described in a [blog entry](https://shrakeblogshere.blogspot.com/2017/11/using-multiple-usb-hid-interfaces-for.html) I posted.
+
+
 ## Requirements
 
 * Keil uVision v5.2x
